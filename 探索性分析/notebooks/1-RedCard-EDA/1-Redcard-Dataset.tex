@@ -1,0 +1,1195 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{1-Redcard-Dataset}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{探索性数据分析（EDA）}\label{ux63a2ux7d22ux6027ux6570ux636eux5206ux6790eda}
+
+有趣的数据集，包含球员和裁判之间的故事！
+
+数据集介绍点击： \href{https://osf.io/47tnc/}{here}.
+
+    \subsection{任务：}\label{ux4efbux52a1}
+
+探索性数据分析（EDA）. 挑战目标:
+\textbf{这些裁判在给红牌的时候咋想的呢，会不会被跟球员的肤色有关?}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{o}{\PYZpc{}}\PY{k}{config} InlineBackend.figure\PYZus{}format=\PYZsq{}retina\PYZsq{}
+        
+        \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{absolute\PYZus{}import}\PY{p}{,} \PY{n}{division}\PY{p}{,} \PY{n}{print\PYZus{}function}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib} \PY{k}{as} \PY{n+nn}{mpl}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{import} \PY{n}{GridSpec}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{os}\PY{o}{,} \PY{n+nn}{sys}
+        \PY{k+kn}{from} \PY{n+nn}{tqdm} \PY{k}{import} \PY{n}{tqdm}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set\PYZus{}context}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{poster}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mf}{1.3}\PY{p}{)}
+        
+        \PY{k+kn}{import} \PY{n+nn}{missingno} \PY{k}{as} \PY{n+nn}{msno}
+        \PY{k+kn}{import} \PY{n+nn}{pandas\PYZus{}profiling}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k}{import} \PY{n}{make\PYZus{}blobs}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+\end{Verbatim}
+
+    \subsection{数据简介：}\label{ux6570ux636eux7b80ux4ecb}
+
+\begin{quote}
+数据包含球员和裁判的信息，2012-2013年的比赛数据，总共设计球员2053名，裁判3147名，特征列表如下：
+\end{quote}
+
+\begin{quote}
+-\/-
+https://docs.google.com/document/d/1uCF5wmbcL90qvrk\_J27fWAvDcDNrO9o\_APkicwRkOKc/edit
+\end{quote}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.04\columnwidth}\raggedright\strut
+Variable Name:\strut
+\end{minipage} & \begin{minipage}[b]{0.04\columnwidth}\raggedright\strut
+Variable Description:\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+playerShort\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+short player ID\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+player\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+player name\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+club\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+player club\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+leagueCountry\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+country of player club (England, Germany, France, and Spain)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+height\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+player height (in cm)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+weight\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+player weight (in kg)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+position\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+player position\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+games\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+number of games in the player-referee dyad\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+goals\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+number of goals in the player-referee dyad\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+yellowCards\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+number of yellow cards player received from the referee\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+yellowReds\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+number of yellow-red cards player received from the referee\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+redCards\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+number of red cards player received from the referee\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+photoID\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+ID of player photo (if available)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+rater1\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+skin rating of photo by rater 1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+rater2\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+skin rating of photo by rater 2\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+refNum\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+unique referee ID number (referee name removed for anonymizing
+purposes)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+refCountry\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+unique referee country ID number\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+meanIAT\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+mean implicit bias score (using the race IAT) for referee country\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+nIAT\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+sample size for race IAT in that particular country\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+seIAT\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+standard error for mean estimate of race IAT\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+meanExp\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+mean explicit bias score (using a racial thermometer task) for referee
+country\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+nExp\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+sample size for explicit bias in that particular country\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+seExp\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+standard error for mean estimate of explicit bias measure\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Uncomment one of the following lines and run the cell:}
+        
+        \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{redcard.csv.gz}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{compression}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gzip}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{df}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} (146028, 28)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}      playerShort         player             club leagueCountry    birthday  \textbackslash{}
+        0  lucas-wilchez  Lucas Wilchez    Real Zaragoza         Spain  31.08.1983   
+        1     john-utaka     John Utaka  Montpellier HSC        France  08.01.1982   
+        2    abdon-prats    Abdón Prats     RCD Mallorca         Spain  17.12.1992   
+        3     pablo-mari     Pablo Marí     RCD Mallorca         Spain  31.08.1993   
+        4     ruben-pena     Rubén Peña  Real Valladolid         Spain  18.07.1991   
+        
+           height  weight              position  games  victories    {\ldots}     rater2  \textbackslash{}
+        0   177.0    72.0  Attacking Midfielder      1          0    {\ldots}       0.50   
+        1   179.0    82.0          Right Winger      1          0    {\ldots}       0.75   
+        2   181.0    79.0                   NaN      1          0    {\ldots}        NaN   
+        3   191.0    87.0           Center Back      1          1    {\ldots}        NaN   
+        4   172.0    70.0      Right Midfielder      1          1    {\ldots}        NaN   
+        
+           refNum  refCountry  Alpha\_3   meanIAT    nIAT     seIAT   meanExp    nExp  \textbackslash{}
+        0       1           1      GRC  0.326391   712.0  0.000564  0.396000   750.0   
+        1       2           2      ZMB  0.203375    40.0  0.010875 -0.204082    49.0   
+        2       3           3      ESP  0.369894  1785.0  0.000229  0.588297  1897.0   
+        3       3           3      ESP  0.369894  1785.0  0.000229  0.588297  1897.0   
+        4       3           3      ESP  0.369894  1785.0  0.000229  0.588297  1897.0   
+        
+              seExp  
+        0  0.002696  
+        1  0.061504  
+        2  0.001002  
+        3  0.001002  
+        4  0.001002  
+        
+        [5 rows x 28 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}                 count          mean            std           min          25\%  \textbackslash{}
+        height       145765.0    181.935938       6.738726  1.610000e+02   177.000000   
+        weight       143785.0     76.075662       7.140906  5.400000e+01    71.000000   
+        games        146028.0      2.921166       3.413633  1.000000e+00     1.000000   
+        victories    146028.0      1.278344       1.790725  0.000000e+00     0.000000   
+        ties         146028.0      0.708241       1.116793  0.000000e+00     0.000000   
+        defeats      146028.0      0.934581       1.383059  0.000000e+00     0.000000   
+        goals        146028.0      0.338058       0.906481  0.000000e+00     0.000000   
+        yellowCards  146028.0      0.385364       0.795333  0.000000e+00     0.000000   
+        yellowReds   146028.0      0.011381       0.107931  0.000000e+00     0.000000   
+        redCards     146028.0      0.012559       0.112889  0.000000e+00     0.000000   
+        rater1       124621.0      0.264255       0.295382  0.000000e+00     0.000000   
+        rater2       124621.0      0.302862       0.293020  0.000000e+00     0.000000   
+        refNum       146028.0   1534.827444     918.736625  1.000000e+00   641.000000   
+        refCountry   146028.0     29.642842      27.496189  1.000000e+00     7.000000   
+        meanIAT      145865.0      0.346276       0.032246 -4.725423e-02     0.334684   
+        nIAT         145865.0  19697.411216  127126.197143  2.000000e+00  1785.000000   
+        seIAT        145865.0      0.000631       0.004736  2.235373e-07     0.000055   
+        meanExp      145865.0      0.452026       0.217469 -1.375000e+00     0.336101   
+        nExp         145865.0  20440.233860  130615.745103  2.000000e+00  1897.000000   
+        seExp        145865.0      0.002994       0.019723  1.043334e-06     0.000225   
+        
+                             50\%          75\%           max  
+        height        182.000000   187.000000  2.030000e+02  
+        weight         76.000000    81.000000  1.000000e+02  
+        games           2.000000     3.000000  4.700000e+01  
+        victories       1.000000     2.000000  2.900000e+01  
+        ties            0.000000     1.000000  1.400000e+01  
+        defeats         1.000000     1.000000  1.800000e+01  
+        goals           0.000000     0.000000  2.300000e+01  
+        yellowCards     0.000000     1.000000  1.400000e+01  
+        yellowReds      0.000000     0.000000  3.000000e+00  
+        redCards        0.000000     0.000000  2.000000e+00  
+        rater1          0.250000     0.250000  1.000000e+00  
+        rater2          0.250000     0.500000  1.000000e+00  
+        refNum       1604.000000  2345.000000  3.147000e+03  
+        refCountry     21.000000    44.000000  1.610000e+02  
+        meanIAT         0.336628     0.369894  5.737933e-01  
+        nIAT         2882.000000  7749.000000  1.975803e+06  
+        seIAT           0.000151     0.000229  2.862871e-01  
+        meanExp         0.356446     0.588297  1.800000e+00  
+        nExp         3011.000000  7974.000000  2.029548e+06  
+        seExp           0.000586     0.001002  1.060660e+00  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} playerShort       object
+        player            object
+        club              object
+        leagueCountry     object
+        birthday          object
+        height           float64
+        weight           float64
+        position          object
+        games              int64
+        victories          int64
+        ties               int64
+        defeats            int64
+        goals              int64
+        yellowCards        int64
+        yellowReds         int64
+        redCards           int64
+        photoID           object
+        rater1           float64
+        rater2           float64
+        refNum             int64
+        refCountry         int64
+        Alpha\_3           object
+        meanIAT          float64
+        nIAT             float64
+        seIAT            float64
+        meanExp          float64
+        nExp             float64
+        seExp            float64
+        dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{all\PYZus{}columns} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+         \PY{n}{all\PYZus{}columns}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} ['playerShort',
+          'player',
+          'club',
+          'leagueCountry',
+          'birthday',
+          'height',
+          'weight',
+          'position',
+          'games',
+          'victories',
+          'ties',
+          'defeats',
+          'goals',
+          'yellowCards',
+          'yellowReds',
+          'redCards',
+          'photoID',
+          'rater1',
+          'rater2',
+          'refNum',
+          'refCountry',
+          'Alpha\_3',
+          'meanIAT',
+          'nIAT',
+          'seIAT',
+          'meanExp',
+          'nExp',
+          'seExp']
+\end{Verbatim}
+            
+    \subsection{Challenge}\label{challenge}
+
+Before looking below, try to answer some high level questions about the
+dataset.
+
+How do we operationalize the question of referees giving more red cards
+to dark skinned players? * Counterfactual: if the player were lighter, a
+ref is more likely to have given a yellow or no card \textbf{for the
+same offense under the same conditions} * Regression: accounting for
+confounding, darker players have positive coefficient on regression
+against proportion red/total card
+
+Potential issues * How to combine rater1 and rater2? Average them? What
+if they disagree? Throw it out? * Is data imbalanced, i.e. red cards are
+very rare? * Is data biased, i.e. players have different amounts of play
+time? Is this a summary of their whole career? * How do I know I've
+accounted for all forms of confounding?
+
+\textbf{First, is there systematic discrimination across all refs?}
+
+Exploration/hypotheses: * Distribution of games played * red cards vs
+games played * Reds per game played vs total cards per game played by
+skin color * Distribution of \# red, \# yellow, total cards, and
+fraction red per game played for all players by avg skin color * How
+many refs did players encounter? * Do some clubs play more aggresively
+and get carded more? Or are more reserved and get less? * Does carding
+vary by leagueCountry? * Do high scorers get more slack (fewer cards)
+for the same position? * Are there some referees that give more
+red/yellow cards than others? * how consistent are raters? Check with
+Cohen's kappa. * how do red cards vary by position? e.g. defenders get
+more? * Do players with more games get more cards, and is there
+difference across skin color? * indication of bias depending on
+refCountry?
+
+    \subsection{Understand how the data's
+organized}\label{understand-how-the-datas-organized}
+
+The dataset is a single csv where it aggregated every interaction
+between referee and player into a single row. In other words: Referee A
+refereed Player B in, say, 10 games, and gave 2 redcards during those 10
+games. Then there would be a unique row in the dataset that said:
+
+\begin{verbatim}
+Referee A, Player B, 2 redcards, ... 
+\end{verbatim}
+
+This has several implications that make this first step to understanding
+and dealing with this data a bit tricky. First, is that the information
+about Player B is repeated each time -\/- meaning if we did a simple
+average of some metric of we would likely get a misleading result.
+
+For example, asking "what is the average \texttt{weight} of the
+players?"
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} 181.93593798236887
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:} 181.93593798236887
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{playerShort}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{height}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:} 181.74372848007872
+\end{Verbatim}
+            
+    \subsection{Tidy Data}\label{tidy-data}
+
+Hadley Wickham's concept of a \textbf{tidy dataset} summarized as:
+
+\begin{quote}
+\begin{itemize}
+\tightlist
+\item
+  Each variable forms a column
+\item
+  Each observation forms a row
+\item
+  Each type of observational unit forms a table
+\end{itemize}
+\end{quote}
+
+A longer paper describing this can be found in this
+\href{https://www.jstatsoft.org/article/view/v059i10/v59i10.pdf}{pdf}.
+
+Having datasets in this form allows for much simpler analyses. So the
+first step is to try and clean up the dataset into a tidy dataset.
+
+The first step that I am going to take is to break up the dataset into
+the different observational units. By that I'm going to have separate
+tables (or dataframes) for:
+
+\begin{itemize}
+\tightlist
+\item
+  players
+\item
+  clubs
+\item
+  referees
+\item
+  countries
+\item
+  dyads
+\end{itemize}
+
+    \subsection{Create Tidy Players Table}\label{create-tidy-players-table}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{df2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{one}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{one}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{one}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n}{df2}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}       data1     data2 key1 key2
+        0 -0.684572 -1.514165    a  one
+        1  0.393477  0.230970    a  two
+        2 -1.033184  0.072844    b  one
+        3  0.387763  0.771857    b  two
+        4  0.010037  0.676437    a  one
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{grouped} \PY{o}{=} \PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{grouped}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} key1
+         a   -0.093686
+         b   -0.322711
+         Name: data1, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{player\PYZus{}index} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{playerShort}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{player\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{c+c1}{\PYZsh{}\PYZsq{}player\PYZsq{}, \PYZsh{} drop player name, we have unique identifier}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{birthday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{position}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{photoID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rater1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rater2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                       \PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} Count the unique variables (if we got different weight values, }
+         \PY{c+c1}{\PYZsh{} for example, then we should get more than one unique value in this groupby)}
+         \PY{n}{all\PYZus{}cols\PYZus{}unique\PYZus{}players} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{playerShort}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{\PYZob{}}\PY{n}{col}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nunique}\PY{l+s+s1}{\PYZsq{}} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{player\PYZus{}cols}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{all\PYZus{}cols\PYZus{}unique\PYZus{}players}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:}                         position  rater2  birthday  height  weight  photoID  \textbackslash{}
+         playerShort                                                                   
+         aaron-hughes                   1       1         1       1       1        1   
+         aaron-hunt                     1       1         1       1       1        1   
+         aaron-lennon                   1       1         1       1       1        1   
+         aaron-ramsey                   1       1         1       1       1        1   
+         abdelhamid-el-kaoutari         1       1         1       1       1        1   
+         
+                                 rater1  
+         playerShort                     
+         aaron-hughes                 1  
+         aaron-hunt                   1  
+         aaron-lennon                 1  
+         aaron-ramsey                 1  
+         abdelhamid-el-kaoutari       1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} If all values are the same per player then this should be empty (and it is!)}
+         \PY{n}{all\PYZus{}cols\PYZus{}unique\PYZus{}players}\PY{p}{[}\PY{n}{all\PYZus{}cols\PYZus{}unique\PYZus{}players} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} Empty DataFrame
+         Columns: [position, rater2, birthday, height, weight, photoID, rater1]
+         Index: []
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} A slightly more elegant way to test the uniqueness}
+         \PY{n}{all\PYZus{}cols\PYZus{}unique\PYZus{}players}\PY{p}{[}\PY{n}{all\PYZus{}cols\PYZus{}unique\PYZus{}players} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} True
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}subgroup}\PY{p}{(}\PY{n}{dataframe}\PY{p}{,} \PY{n}{g\PYZus{}index}\PY{p}{,} \PY{n}{g\PYZus{}columns}\PY{p}{)}\PY{p}{:}
+             
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Helper function that creates a sub\PYZhy{}table from the columns and runs a quick uniqueness test.\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{g} \PY{o}{=} \PY{n}{dataframe}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{g\PYZus{}index}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{\PYZob{}}\PY{n}{col}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nunique}\PY{l+s+s1}{\PYZsq{}} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{g\PYZus{}columns}\PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{k}{if} \PY{n}{g}\PY{p}{[}\PY{n}{g} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Warning: you probably assumed this had all unique values but it doesn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{return} \PY{n}{dataframe}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{g\PYZus{}index}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{\PYZob{}}\PY{n}{col}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max}\PY{l+s+s1}{\PYZsq{}} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{g\PYZus{}columns}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{players} \PY{o}{=} \PY{n}{get\PYZus{}subgroup}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{player\PYZus{}index}\PY{p}{,} \PY{n}{player\PYZus{}cols}\PY{p}{)}
+         \PY{n}{players}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:}                                     position  rater2    birthday  height  \textbackslash{}
+         playerShort                                                                
+         aaron-hughes                     Center Back    0.00  08.11.1979   182.0   
+         aaron-hunt              Attacking Midfielder    0.25  04.09.1986   183.0   
+         aaron-lennon                Right Midfielder    0.25  16.04.1987   165.0   
+         aaron-ramsey               Center Midfielder    0.00  26.12.1990   178.0   
+         abdelhamid-el-kaoutari           Center Back    0.25  17.03.1990   180.0   
+         
+                                 weight     photoID  rater1  
+         playerShort                                         
+         aaron-hughes              71.0    3868.jpg    0.25  
+         aaron-hunt                73.0   20136.jpg    0.00  
+         aaron-lennon              63.0   13515.jpg    0.25  
+         aaron-ramsey              76.0   94953.jpg    0.00  
+         abdelhamid-el-kaoutari    73.0  124913.jpg    0.25  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{k}{def} \PY{n+nf}{save\PYZus{}subgroup}\PY{p}{(}\PY{n}{dataframe}\PY{p}{,} \PY{n}{g\PYZus{}index}\PY{p}{,} \PY{n}{subgroup\PYZus{}name}\PY{p}{,} \PY{n}{prefix}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{raw\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{n}{save\PYZus{}subgroup\PYZus{}filename} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{[}\PY{n}{prefix}\PY{p}{,} \PY{n}{subgroup\PYZus{}name}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.csv.gz}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{dataframe}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{save\PYZus{}subgroup\PYZus{}filename}\PY{p}{,} \PY{n}{compression}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gzip}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UTF\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{test\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{save\PYZus{}subgroup\PYZus{}filename}\PY{p}{,} \PY{n}{compression}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gzip}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{n}{g\PYZus{}index}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UTF\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Test that we recover what we send in}
+             \PY{k}{if} \PY{n}{dataframe}\PY{o}{.}\PY{n}{equals}\PY{p}{(}\PY{n}{test\PYZus{}df}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test\PYZhy{}passed: we recover the equivalent subgroup dataframe.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Warning \PYZhy{}\PYZhy{} equivalence test!!! Double\PYZhy{}check.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{players} \PY{o}{=} \PY{n}{get\PYZus{}subgroup}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{player\PYZus{}index}\PY{p}{,} \PY{n}{player\PYZus{}cols}\PY{p}{)}
+         \PY{n}{players}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:}                                     position  rater2    birthday  height  \textbackslash{}
+         playerShort                                                                
+         aaron-hughes                     Center Back    0.00  08.11.1979   182.0   
+         aaron-hunt              Attacking Midfielder    0.25  04.09.1986   183.0   
+         aaron-lennon                Right Midfielder    0.25  16.04.1987   165.0   
+         aaron-ramsey               Center Midfielder    0.00  26.12.1990   178.0   
+         abdelhamid-el-kaoutari           Center Back    0.25  17.03.1990   180.0   
+         
+                                 weight     photoID  rater1  
+         playerShort                                         
+         aaron-hughes              71.0    3868.jpg    0.25  
+         aaron-hunt                73.0   20136.jpg    0.00  
+         aaron-lennon              63.0   13515.jpg    0.25  
+         aaron-ramsey              76.0   94953.jpg    0.00  
+         abdelhamid-el-kaoutari    73.0  124913.jpg    0.25  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{save\PYZus{}subgroup}\PY{p}{(}\PY{n}{players}\PY{p}{,} \PY{n}{player\PYZus{}index}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{players}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test-passed: we recover the equivalent subgroup dataframe.
+
+    \end{Verbatim}
+
+    \subsection{Create Tidy Clubs Table}\label{create-tidy-clubs-table}
+
+Create the clubs table.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{club\PYZus{}index} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{club}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{club\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{leagueCountry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{clubs} \PY{o}{=} \PY{n}{get\PYZus{}subgroup}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{club\PYZus{}index}\PY{p}{,} \PY{n}{club\PYZus{}cols}\PY{p}{)}
+         \PY{n}{clubs}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:}                 leagueCountry
+         club                         
+         1. FC Nürnberg        Germany
+         1. FSV Mainz 05       Germany
+         1899 Hoffenheim       Germany
+         AC Ajaccio             France
+         AFC Bournemouth       England
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{clubs}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{leagueCountry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} England    48
+         Spain      27
+         France     22
+         Germany    21
+         Name: leagueCountry, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{save\PYZus{}subgroup}\PY{p}{(}\PY{n}{clubs}\PY{p}{,} \PY{n}{club\PYZus{}index}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clubs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test-passed: we recover the equivalent subgroup dataframe.
+
+    \end{Verbatim}
+
+    \subsection{Create Tidy Referees
+Table}\label{create-tidy-referees-table}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{referee\PYZus{}index} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{refNum}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{referee\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{refCountry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{referees} \PY{o}{=} \PY{n}{get\PYZus{}subgroup}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{referee\PYZus{}index}\PY{p}{,} \PY{n}{referee\PYZus{}cols}\PY{p}{)}
+         \PY{n}{referees}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:}         refCountry
+         refNum            
+         1                1
+         2                2
+         3                3
+         4                4
+         5                5
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{referees}\PY{o}{.}\PY{n}{refCountry}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} 161
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{referees}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:}         refCountry
+         refNum            
+         3143            51
+         3144            55
+         3145            21
+         3146            51
+         3147            21
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{referees}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} (3147, 1)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{save\PYZus{}subgroup}\PY{p}{(}\PY{n}{referees}\PY{p}{,} \PY{n}{referee\PYZus{}index}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{referees}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test-passed: we recover the equivalent subgroup dataframe.
+
+    \end{Verbatim}
+
+    \subsection{Create Tidy Countries
+Table}\label{create-tidy-countries-table}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{country\PYZus{}index} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{refCountry}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{country\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alpha\PYZus{}3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{c+c1}{\PYZsh{} rename this name of country}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{meanIAT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nIAT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seIAT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{meanExp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nExp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seExp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{p}{]}
+         \PY{n}{countries} \PY{o}{=} \PY{n}{get\PYZus{}subgroup}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{country\PYZus{}index}\PY{p}{,} \PY{n}{country\PYZus{}cols}\PY{p}{)}
+         \PY{n}{countries}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:}            Alpha\_3   meanIAT    nIAT   meanExp     seExp     seIAT    nExp
+         refCountry                                                                
+         1              GRC  0.326391   712.0  0.396000  0.002696  0.000564   750.0
+         2              ZMB  0.203375    40.0 -0.204082  0.061504  0.010875    49.0
+         3              ESP  0.369894  1785.0  0.588297  0.001002  0.000229  1897.0
+         4              LUX  0.325185   127.0  0.538462  0.013752  0.003297   130.0
+         5              TUN  0.167132    19.0 -0.789474  0.111757  0.027327    19.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{rename\PYZus{}columns} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alpha\PYZus{}3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{countryName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{\PYZcb{}}
+         \PY{n}{countries} \PY{o}{=} \PY{n}{countries}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{rename\PYZus{}columns}\PY{p}{)}
+         \PY{n}{countries}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:}            countryName   meanIAT    nIAT   meanExp     seExp     seIAT    nExp
+         refCountry                                                                    
+         1                  GRC  0.326391   712.0  0.396000  0.002696  0.000564   750.0
+         2                  ZMB  0.203375    40.0 -0.204082  0.061504  0.010875    49.0
+         3                  ESP  0.369894  1785.0  0.588297  0.001002  0.000229  1897.0
+         4                  LUX  0.325185   127.0  0.538462  0.013752  0.003297   130.0
+         5                  TUN  0.167132    19.0 -0.789474  0.111757  0.027327    19.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{countries}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:} (161, 7)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{save\PYZus{}subgroup}\PY{p}{(}\PY{n}{countries}\PY{p}{,} \PY{n}{country\PYZus{}index}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{countries}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning -- equivalence test!!! Double-check.
+
+    \end{Verbatim}
+
+    \subsection{Create separate (not yet Tidy) Dyads
+Table}\label{create-separate-not-yet-tidy-dyads-table}
+
+This is one of the more complex tables to reason about -\/- so we'll
+save it for a bit later.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{dyad\PYZus{}index} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{refNum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{playerShort}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{dyad\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{games}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{victories}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ties}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{defeats}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{goals}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yellowCards}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yellowReds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{redCards}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                     \PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{dyads} \PY{o}{=} \PY{n}{get\PYZus{}subgroup}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{g\PYZus{}index}\PY{o}{=}\PY{n}{dyad\PYZus{}index}\PY{p}{,} \PY{n}{g\PYZus{}columns}\PY{o}{=}\PY{n}{dyad\PYZus{}cols}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{dyads}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:}                       redCards  victories  defeats  goals  games  yellowCards  \textbackslash{}
+         refNum playerShort                                                              
+         1      lucas-wilchez         0          0        1      0      1            0   
+         2      john-utaka            0          0        1      0      1            1   
+         3      abdon-prats           0          0        0      0      1            1   
+                pablo-mari            0          1        0      0      1            0   
+                ruben-pena            0          1        0      0      1            0   
+         
+                               ties  yellowReds  
+         refNum playerShort                      
+         1      lucas-wilchez     0           0  
+         2      john-utaka        0           0  
+         3      abdon-prats       1           0  
+                pablo-mari        0           0  
+                ruben-pena        0           0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{dyads}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:} (146028, 8)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{dyads}\PY{p}{[}\PY{n}{dyads}\PY{o}{.}\PY{n}{redCards} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:}                           yellowCards  yellowReds  victories  ties  games  \textbackslash{}
+         refNum playerShort                                                          
+         140    bodipo                       0           0          2     1      6   
+         367    antonio-lopez\_2              2           0          5     2      8   
+         432    javi-martinez                2           0          4     3     14   
+                jonas                        0           0          1     4      9   
+         487    phil-jagielka                0           0          2     1      7   
+         586    cyril-jeunechamp             6           0          8     0     14   
+         804    sergio-ramos                 6           1         12     1     18   
+         985    aly-cissokho                 1           0          1     5      9   
+         1114   eugen-polanski               0           0          4     0      8   
+         1214   emmanuel-adebayor            4           1          9     7     23   
+         
+                                   defeats  goals  redCards  
+         refNum playerShort                                  
+         140    bodipo                   3      1         2  
+         367    antonio-lopez\_2          1      0         2  
+         432    javi-martinez            7      2         2  
+                jonas                    4      1         2  
+         487    phil-jagielka            4      1         2  
+         586    cyril-jeunechamp         6      0         2  
+         804    sergio-ramos             5      4         2  
+         985    aly-cissokho             3      1         2  
+         1114   eugen-polanski           4      0         2  
+         1214   emmanuel-adebayor        7     10         2  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{save\PYZus{}subgroup}\PY{p}{(}\PY{n}{dyads}\PY{p}{,} \PY{n}{dyad\PYZus{}index}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dyads}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test-passed: we recover the equivalent subgroup dataframe.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{dyads}\PY{o}{.}\PY{n}{redCards}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} 2
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
