@@ -105,4 +105,5 @@ venv.bak/
 
 # datasets
 pydata/datasets
+.DS_Store
 
